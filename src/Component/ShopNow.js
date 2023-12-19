@@ -1,5 +1,9 @@
 import React, { useState } from 'react';
-import { Container, Row, Col, Form, Button } from 'react-bootstrap';
+import { Container, Row, Col, Form, Button, Modal } from 'react-bootstrap';
+import Product1Image from './ShopProd/Fender.png';
+import Product2Image from './ShopProd/Makala.png';
+import Product3Image from './ShopProd/Yamaha.png';
+import Product4Image from './ShopProd/Remo.png';
 
 const ShopNow = () => {
   const initialMusicTypes = [
@@ -9,16 +13,18 @@ const ShopNow = () => {
   ];
 
   const initialProducts = [
-    { id: 1, name: 'Guitar 1', price: '$199', image: 'guitar1.jpg', type: 'Guitar' },
-    { id: 2, name: 'Guitar 2', price: '$299', image: 'guitar2.jpg', type: 'Guitar' },
-    { id: 3, name: 'Keyboard 1', price: '$399', image: 'keyboard1.jpg', type: 'Keyboard' },
-    { id: 4, name: 'Drums 1', price: '$499', image: 'drums1.jpg', type: 'Drums' },
+    { id: 1, name: 'Makala MK-S Soprano Ukulele', price: 'Rp 2.000.000', image: Product1Image, type: 'Guitar' },
+    { id: 2, name: 'Squier Mini Stratocaster®, Laurel Fingerboard, Dakota Red', price: 'Rp 13.000.000', image: Product2Image, type: 'Guitar' },
+    { id: 3, name: 'Yamaha P71B 88-Key Digital Piano, Black', price: 'Rp 5.000.000', image: Product3Image, type: 'Keyboard' },
+    { id: 4, name: 'Remo Fiberskyn TA-5208-52 8" Double Row Tambourine, Red', price: 'Rp 500.000', image: Product4Image, type: 'Drums' },
     // Add more products as needed
   ];
 
   const [musicTypes, setMusicTypes] = useState(initialMusicTypes);
   const [products, setProducts] = useState(initialProducts);
   const [cart, setCart] = useState([]);
+  const [showModal, setShowModal] = useState(false);
+  const [selectedProduct, setSelectedProduct] = useState(null);
 
   const handleTypeClick = (id) => {
     const updatedTypes = musicTypes.map((type) =>
@@ -43,6 +49,18 @@ const ShopNow = () => {
 
   const addToCart = (product) => {
     setCart([...cart, product]);
+    setSelectedProduct(product);
+    setShowModal(true);
+  };
+
+  const removeFromCart = (productId) => {
+    const updatedCart = cart.filter((item) => item.id !== productId);
+    setCart(updatedCart);
+  };
+
+  const closeModal = () => {
+    setShowModal(false);
+    setSelectedProduct(null);
   };
 
   return (
@@ -72,8 +90,12 @@ const ShopNow = () => {
           <Row>
             {products.map((product) => (
               <Col key={product.id} md={4}>
-                <div>
-                  <img src={product.image} alt={product.name} style={{ width: '100%' }} />
+                <div className="product-card">
+                  <img
+                    src={product.image}
+                    alt={product.name}
+                    className="product-image"
+                  />
                   <p>{product.name}</p>
                   <p>{product.price}</p>
                   <Button onClick={() => addToCart(product)}>Add to Cart</Button>
@@ -83,6 +105,36 @@ const ShopNow = () => {
           </Row>
         </Col>
       </Row>
+
+      <Button onClick={() => setShowModal(true)} className="cart-button">
+        Cart ({cart.length})
+      </Button>
+
+      <Modal show={showModal} onHide={closeModal} size="lg">
+        <Modal.Header closeButton>
+          <Modal.Title>Shopping Cart</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <Container>
+            <Row>
+              {cart.map((item) => (
+                <Col key={item.id} md={4}>
+                  <div className="product-card">
+                    <img src={item.image} alt={item.name} className="product-image" />
+                    <p>{item.name}</p>
+                    <p>{item.price}</p>
+                    <Button onClick={() => removeFromCart(item.id)}>Remove</Button>
+                  </div>
+                </Col>
+              ))}
+            </Row>
+          </Container>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={closeModal}>Close</Button>
+          <Button variant="primary">Checkout</Button>
+        </Modal.Footer>
+      </Modal>
     </Container>
   );
 };

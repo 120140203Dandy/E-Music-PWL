@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 const Login = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Tambahkan logika autentikasi atau navigasi setelah login
+    
   };
 
   return (
@@ -21,7 +21,7 @@ const Login = () => {
           <Form.Label>Password</Form.Label>
           <Form.Control type="password" placeholder="Password" required />
         </Form.Group>
-        <Link to="/register"> {/* Tambahkan Link ke halaman registrasi */}
+        <Link to="/register"> 
           <button>Register Account</button>
         </Link>
         <Button variant="primary" type="submit" className="w-100 mt-3">

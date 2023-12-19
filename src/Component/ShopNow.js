@@ -17,7 +17,7 @@ const ShopNow = () => {
     { id: 2, name: 'Squier Mini Stratocaster®, Laurel Fingerboard, Dakota Red', price: 'Rp 13.000.000', image: Product2Image, type: 'Guitar' },
     { id: 3, name: 'Yamaha P71B 88-Key Digital Piano, Black', price: 'Rp 5.000.000', image: Product3Image, type: 'Keyboard' },
     { id: 4, name: 'Remo Fiberskyn TA-5208-52 8" Double Row Tambourine, Red', price: 'Rp 500.000', image: Product4Image, type: 'Drums' },
-    // Add more products as needed
+    
   ];
 
   const [musicTypes, setMusicTypes] = useState(initialMusicTypes);

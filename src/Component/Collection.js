@@ -1,12 +1,13 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Container, Row, Col, Card } from 'react-bootstrap';
+import Product1Image from './Product/Bass Guitar.png';
 
 const Collection = () => {
   const musicTypes = [
-    { id: 1, name: 'Guitar', image: 'guitar.jpg' },
+    { id: 1, name: 'Guitar', image: Product1Image },
     { id: 2, name: 'Piano', image: 'piano.jpg' },
-    // ...Tambahkan jenis alat musik lainnya
+    
   ];
 
   return (

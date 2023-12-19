@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 const Register = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Tambahkan logika autentikasi atau navigasi setelah login
+    
   };
 
   return (
